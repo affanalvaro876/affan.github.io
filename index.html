@@ -1,312 +1,452 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kalkulator + Rumus Matematika</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #f0f4f9; color: #1f1f1f; padding: 20px; display: flex; justify-content: center; }
-    .container { width: 100%; max-width: 650px; background: #ffffff; border-radius: 16px; padding: 24px; box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
-    
-    header { text-align: center; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 2px solid #e9edf7; }
-    header h1 { color: #0b57d0; font-size: 26px; margin-bottom: 6px; }
-    header p { color: #5e5e5e; font-size: 14px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEPAT MATEMATIKA</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .form-group { margin-bottom: 18px; }
-    label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 14px; color: #444746; }
-    select, input { width: 100%; padding: 10px 12px; border: 1px solid #c4c7c5; border-radius: 8px; font-size: 14px; outline: none; transition: 0.2s; }
-    select:focus, input:focus { border-color: #0b57d0; box-shadow: 0 0 0 2px rgba(11,87,208,0.2); }
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
 
-    .fraction-row { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .fraction-box { display: flex; flex-direction: column; gap: 6px; flex: 1; background: #f8f9fc; padding: 12px; border-radius: 10px; }
-    .fraction-inputs { display: flex; gap: 6px; align-items: center; }
-    .fraction-inputs input { text-align: center; }
-    .operator-label { font-size: 20px; font-weight: bold; color: #0b57d0; text-align: center; }
+        .container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
 
-    .calc-btn { width: 100%; background: #0b57d0; color: white; border: none; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: 0.2s; margin-top: 10px; }
-    .calc-btn:hover { background: #0842a0; }
+        header {
+            background: linear-gradient(135deg, #007bff, #00d2ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-    .result-box { margin-top: 24px; padding: 16px; border-radius: 12px; background: #f0f4f9; border-left: 5px solid #0b57d0; display: none; }
-    .result-box h3 { color: #0b57d0; font-size: 16px; margin-bottom: 8px; }
-    .result-value { font-size: 24px; font-weight: 700; color: #1f1f1f; margin-bottom: 8px; }
-    .result-steps { font-size: 14px; color: #444746; white-space: pre-line; line-height: 1.5; background: #ffffff; padding: 12px; border-radius: 6px; border: 1px solid #e0e2e0; }
-  </style>
+        header h1 {
+            font-size: 1.6rem;
+            letter-spacing: 1px;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        select, input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input:focus {
+            border-color: #007bff;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .input-row .form-group {
+            flex: 1;
+        }
+
+        button.btn-hitung {
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        button.btn-hitung:hover {
+            background-color: #218838;
+        }
+
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-left: 5px solid #007bff;
+            border-radius: 4px;
+            min-height: 60px;
+        }
+
+        .result-title {
+            font-size: 0.85rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #1b2a47;
+            word-break: break-word;
+        }
+    </style>
 </head>
 <body>
 
 <div class="container">
-  <header>
-    <h1>Kalkulator + Rumus</h1>
-    <p>Pilih rumus matematika dan masukkan angka yang diketahui</p>
-  </header>
+    <header>
+        <h1>CEPAT MATEMATIKA</h1>
+    </header>
 
-  <div class="form-group">
-    <label for="formula-select">Pilih Rumus Matematika:</label>
-    <select id="formula-select" onchange="renderInputs()">
-      <optgroup label="Pecahan Campuran">
-        <option value="tambah_campuran">Penjumlahan Pecahan Campuran</option>
-        <option value="kurang_campuran">Pengurangan Pecahan Campuran</option>
-        <option value="kali_campuran">Perkalian Pecahan Campuran</option>
-        <option value="bagi_campuran">Pembagian Pecahan Campuran</option>
-        <option value="campuran_ke_biasa">Ubah Pecahan Campuran ke Biasa/Desimal</option>
-      </optgroup>
-      <optgroup label="Pecahan Biasa & Konversi">
-        <option value="tambah_pecahan">Penjumlahan Pecahan Biasa (a/b + c/d)</option>
-        <option value="kurang_pecahan">Pengurangan Pecahan Biasa (a/b - c/d)</option>
-        <option value="kali_pecahan">Perkalian Pecahan Biasa (a/b × c/d)</option>
-        <option value="bagi_pecahan">Pembagian Pecahan Biasa (a/b ÷ c/d)</option>
-        <option value="pecahan_ke_desimal">Konversi Pecahan ke Desimal</option>
-        <option value="pecahan_ke_persen">Konversi Pecahan ke Persen (%)</option>
-      </optgroup>
-      <optgroup label="Bangun Datar">
-        <option value="luas_persegi">Luas Persegi (s × s)</option>
-        <option value="luas_persegi_panjang">Luas Persegi Panjang (p × l)</option>
-        <option value="luas_segitiga">Luas Segitiga (½ × a × t)</option>
-        <option value="luas_lingkaran">Luas Lingkaran (π × r²)</option>
-      </optgroup>
-      <optgroup label="Bangun Ruang">
-        <option value="volume_kubus">Volume Kubus (s³)</option>
-        <option value="volume_balok">Volume Balok (p × l × t)</option>
-        <option value="volume_tabung">Volume Tabung (π × r² × t)</option>
-      </optgroup>
-      <optgroup label="Teorema & Lainnya">
-        <option value="pythagoras_c">Pythagoras - Cari Miring c (√(a² + b²))</option>
-        <option value="persen">Hitung Persentase (Nilai / Total × 100%)</option>
-      </optgroup>
-    </select>
-  </div>
+    <div class="content">
+        <!-- Pilihan Operasi Matematika -->
+        <div class="form-group">
+            <label for="kategori">Pilih Jenis Perhitungan:</label>
+            <select id="kategori" onchange="renderInputFields()">
+                <option value="penjumlahan">Penjumlahan (+)</option>
+                <option value="pengurangan">Pengurangan (-)</option>
+                <option value="perkalian">Perkalian (×)</option>
+                <option value="pembagian">Pembagian (÷)</option>
+                <option value="pitagoras">Pitagoras (Sisi Miring)</option>
+                <option value="luas">Luas Bangun Datar</option>
+                <option value="volume">Volume Bangun Ruang</option>
+                <option value="kpk">KPK (Kelipatan Persekutuan Terkecil)</option>
+                <option value="fpb">FPB (Faktor Persekutuan Terbesar)</option>
+                <option value="pecahan">Pecahan Biasa (Penjumlahan)</option>
+                <option value="pecahan_campuran">Konversi Pecahan Campuran ke Biasa</option>
+                <option value="desimal">Konversi Pecahan ke Desimal</option>
+                <option value="persen">Persentase (% dari Jumlah)</option>
+                <option value="lainnya">Lainnya (Pangkat & Akar)</option>
+            </select>
+        </div>
 
-  <div id="inputs-container"></div>
+        <!-- Impitan Angka (Input Fields) -->
+        <div id="dynamic-inputs">
+            <!-- Diisi secara dinamis oleh JavaScript -->
+        </div>
 
-  <button class="calc-btn" onclick="calculate()">Hitung Hasil</button>
+        <button class="btn-hitung" onclick="hitung()">HITUNG</button>
 
-  <div id="result-box" class="result-box">
-    <h3>Hasil Perhitungan:</h3>
-    <div id="result-value" class="result-value">0</div>
-    <div id="result-steps" class="result-steps"></div>
-  </div>
+        <!-- Area Hasil -->
+        <div class="result-box">
+            <div class="result-title">Hasil Perhitungan:</div>
+            <div class="result-value" id="hasil">-</div>
+        </div>
+    </div>
 </div>
 
 <script>
-  function getFPB(a, b) {
-    a = Math.abs(a); b = Math.abs(b);
-    while (b) { let t = b; b = a % b; a = t; }
-    return a;
-  }
+    function renderInputFields() {
+        const kategori = document.getElementById('kategori').value;
+        const container = document.getElementById('dynamic-inputs');
+        container.innerHTML = '';
 
-  function formatFraction(num, den) {
-    if (den === 0) return { str: 'Tak terdefinisi', mixed: 'Tak terdefinisi' };
-    const fpb = getFPB(num, den);
-    let sNum = num / fpb;
-    let sDen = den / fpb;
-    if (sDen < 0) { sNum = -sNum; sDen = -sDen; }
-
-    let simpleStr = sDen === 1 ? `${sNum}` : `${sNum}/${sDen}`;
-    
-    // Format Pecahan Campuran
-    let mixedStr = simpleStr;
-    if (Math.abs(sNum) >= sDen && sDen !== 1) {
-      const whole = Math.floor(Math.abs(sNum) / sDen) * (sNum < 0 ? -1 : 1);
-      const rem = Math.abs(sNum) % sDen;
-      mixedStr = rem === 0 ? `${whole}` : `${whole} ${rem}/${sDen}`;
+        if (['penjumlahan', 'pengurangan', 'perkalian', 'pembagian', 'kpk', 'fpb'].includes(kategori)) {
+            container.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Angka Pertama:</label>
+                        <input type="number" id="num1" placeholder="0" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label>Angka Kedua:</label>
+                        <input type="number" id="num2" placeholder="0" step="any">
+                    </div>
+                </div>
+            `;
+        } else if (kategori === 'pitagoras') {
+            container.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Sisi Alas (a):</label>
+                        <input type="number" id="num1" placeholder="0" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label>Sisi Tegak (b):</label>
+                        <input type="number" id="num2" placeholder="0" step="any">
+                    </div>
+                </div>
+            `;
+        } else if (kategori === 'luas') {
+            container.innerHTML = `
+                <div class="form-group">
+                    <label>Bentuk Bangun Datar:</label>
+                    <select id="sub_luas" onchange="renderSubLuas()">
+                        <option value="persegi">Persegi</option>
+                        <option value="persegi_panjang">Persegi Panjang</option>
+                        <option value="segitiga">Segitiga</option>
+                        <option value="lingkaran">Lingkaran</option>
+                    </select>
+                </div>
+                <div id="sub-luas-inputs"></div>
+            `;
+            renderSubLuas();
+        } else if (kategori === 'volume') {
+            container.innerHTML = `
+                <div class="form-group">
+                    <label>Bentuk Bangun Ruang:</label>
+                    <select id="sub_volume" onchange="renderSubVolume()">
+                        <option value="kubus">Kubus</option>
+                        <option value="balok">Balok</option>
+                        <option value="tabung">Tabung</option>
+                    </select>
+                </div>
+                <div id="sub-volume-inputs"></div>
+            `;
+            renderSubVolume();
+        } else if (kategori === 'pecahan') {
+            container.innerHTML = `
+                <label>Pecahan 1 (Pembilang / Penyebut):</label>
+                <div class="input-row">
+                    <div class="form-group"><input type="number" id="num1" placeholder="Pembilang 1"></div>
+                    <div class="form-group"><input type="number" id="den1" placeholder="Penyebut 1"></div>
+                </div>
+                <label>Pecahan 2 (Pembilang / Penyebut):</label>
+                <div class="input-row">
+                    <div class="form-group"><input type="number" id="num2" placeholder="Pembilang 2"></div>
+                    <div class="form-group"><input type="number" id="den2" placeholder="Penyebut 2"></div>
+                </div>
+            `;
+        } else if (kategori === 'pecahan_campuran') {
+            container.innerHTML = `
+                <label>Pecahan Campuran (Bulat + Pembilang / Penyebut):</label>
+                <div class="input-row">
+                    <div class="form-group"><input type="number" id="num_bulat" placeholder="Bil. Bulat"></div>
+                    <div class="form-group"><input type="number" id="num1" placeholder="Pembilang"></div>
+                    <div class="form-group"><input type="number" id="den1" placeholder="Penyebut"></div>
+                </div>
+            `;
+        } else if (kategori === 'desimal') {
+            container.innerHTML = `
+                <label>Pecahan Biasa:</label>
+                <div class="input-row">
+                    <div class="form-group"><input type="number" id="num1" placeholder="Pembilang"></div>
+                    <div class="form-group"><input type="number" id="den1" placeholder="Penyebut"></div>
+                </div>
+            `;
+        } else if (kategori === 'persen') {
+            container.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group">
+                        <label>Persen (%):</label>
+                        <input type="number" id="num1" placeholder="Contoh: 20" step="any">
+                    </div>
+                    <div class="form-group">
+                        <label>Dari Total:</label>
+                        <input type="number" id="num2" placeholder="Contoh: 150000" step="any">
+                    </div>
+                </div>
+            `;
+        } else if (kategori === 'lainnya') {
+            container.innerHTML = `
+                <div class="form-group">
+                    <label>Jenis Operasi:</label>
+                    <select id="sub_lainnya" onchange="renderSubLainnya()">
+                        <option value="pangkat">Pangkat (x^y)</option>
+                        <option value="akar">Akar Kuadrat (√x)</option>
+                        <option value="modulo">Sisa Bagi (Modulo)</option>
+                    </select>
+                </div>
+                <div id="sub-lainnya-inputs"></div>
+            `;
+            renderSubLainnya();
+        }
     }
 
-    return { num: sNum, den: sDen, str: simpleStr, mixed: mixedStr };
-  }
-
-  function renderInputs() {
-    const selected = document.getElementById('formula-select').value;
-    const container = document.getElementById('inputs-container');
-    const resultBox = document.getElementById('result-box');
-    container.innerHTML = '';
-    resultBox.style.display = 'none';
-
-    // Pecahan Campuran (2 Bilangan)
-    if (['tambah_campuran', 'kurang_campuran', 'kali_campuran', 'bagi_campuran'].includes(selected)) {
-      const opSymbol = selected === 'tambah_campuran' ? '+' : selected === 'kurang_campuran' ? '-' : selected === 'kali_campuran' ? '×' : '÷';
-      container.innerHTML = `
-        <div class="fraction-row">
-          <div class="fraction-box">
-            <label>Pecahan Pertama:</label>
-            <div class="fraction-inputs">
-              <input type="number" id="w1" placeholder="Utuh (A)" style="flex:1">
-              <div style="display:flex; flex-direction:column; flex:1; gap:4px;">
-                <input type="number" id="num1" placeholder="Pembilang (a)">
-                <input type="number" id="den1" placeholder="Penyebut (b)">
-              </div>
-            </div>
-          </div>
-          <div class="operator-label">${opSymbol}</div>
-          <div class="fraction-box">
-            <label>Pecahan Kedua:</label>
-            <div class="fraction-inputs">
-              <input type="number" id="w2" placeholder="Utuh (B)" style="flex:1">
-              <div style="display:flex; flex-direction:column; flex:1; gap:4px;">
-                <input type="number" id="num2" placeholder="Pembilang (c)">
-                <input type="number" id="den2" placeholder="Penyebut (d)">
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-      return;
+    function renderSubLuas() {
+        const sub = document.getElementById('sub_luas').value;
+        const box = document.getElementById('sub-luas-inputs');
+        if (sub === 'persegi') {
+            box.innerHTML = `<div class="form-group"><label>Sisi:</label><input type="number" id="num1" step="any"></div>`;
+        } else if (sub === 'persegi_panjang') {
+            box.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group"><label>Panjang:</label><input type="number" id="num1" step="any"></div>
+                    <div class="form-group"><label>Lebar:</label><input type="number" id="num2" step="any"></div>
+                </div>`;
+        } else if (sub === 'segitiga') {
+            box.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group"><label>Alas:</label><input type="number" id="num1" step="any"></div>
+                    <div class="form-group"><label>Tinggi:</label><input type="number" id="num2" step="any"></div>
+                </div>`;
+        } else if (sub === 'lingkaran') {
+            box.innerHTML = `<div class="form-group"><label>Jari-jari (r):</label><input type="number" id="num1" step="any"></div>`;
+        }
     }
 
-    // Konversi Pecahan Campuran Tunggal
-    if (selected === 'campuran_ke_biasa') {
-      container.innerHTML = `
-        <div class="fraction-box">
-          <label>Masukkan Pecahan Campuran (A a/b):</label>
-          <div class="fraction-inputs">
-            <input type="number" id="w1" placeholder="Bilangan Utuh (A)">
-            <div style="display:flex; flex-direction:column; flex:1; gap:4px;">
-              <input type="number" id="num1" placeholder="Pembilang (a)">
-              <input type="number" id="den1" placeholder="Penyebut (b)">
-            </div>
-          </div>
-        </div>
-      `;
-      return;
+    function renderSubVolume() {
+        const sub = document.getElementById('sub_volume').value;
+        const box = document.getElementById('sub-volume-inputs');
+        if (sub === 'kubus') {
+            box.innerHTML = `<div class="form-group"><label>Sisi/Rusuk:</label><input type="number" id="num1" step="any"></div>`;
+        } else if (sub === 'balok') {
+            box.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group"><label>Panjang:</label><input type="number" id="num1" step="any"></div>
+                    <div class="form-group"><label>Lebar:</label><input type="number" id="num2" step="any"></div>
+                </div>
+                <div class="form-group"><label>Tinggi:</label><input type="number" id="num3" step="any"></div>`;
+        } else if (sub === 'tabung') {
+            box.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group"><label>Jari-jari (r):</label><input type="number" id="num1" step="any"></div>
+                    <div class="form-group"><label>Tinggi (t):</label><input type="number" id="num2" step="any"></div>
+                </div>`;
+        }
     }
 
-    // Pecahan Biasa
-    if (['tambah_pecahan', 'kurang_pecahan', 'kali_pecahan', 'bagi_pecahan'].includes(selected)) {
-      const opSymbol = selected === 'tambah_pecahan' ? '+' : selected === 'kurang_pecahan' ? '-' : selected === 'kali_pecahan' ? '×' : '÷';
-      container.innerHTML = `
-        <div class="fraction-row">
-          <div class="fraction-box">
-            <label>Pecahan Pertama (a/b):</label>
-            <input type="number" id="num1" placeholder="Pembilang (a)">
-            <input type="number" id="den1" placeholder="Penyebut (b)">
-          </div>
-          <div class="operator-label">${opSymbol}</div>
-          <div class="fraction-box">
-            <label>Pecahan Kedua (c/d):</label>
-            <input type="number" id="num2" placeholder="Pembilang (c)">
-            <input type="number" id="den2" placeholder="Penyebut (d)">
-          </div>
-        </div>
-      `;
-      return;
+    function renderSubLainnya() {
+        const sub = document.getElementById('sub_lainnya').value;
+        const box = document.getElementById('sub-lainnya-inputs');
+        if (sub === 'pangkat') {
+            box.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group"><label>Angka Utama (x):</label><input type="number" id="num1" step="any"></div>
+                    <div class="form-group"><label>Pangkat (y):</label><input type="number" id="num2" step="any"></div>
+                </div>`;
+        } else if (sub === 'akar') {
+            box.innerHTML = `<div class="form-group"><label>Angka (x):</label><input type="number" id="num1" step="any"></div>`;
+        } else if (sub === 'modulo') {
+            box.innerHTML = `
+                <div class="input-row">
+                    <div class="form-group"><label>Angka Utama:</label><input type="number" id="num1"></div>
+                    <div class="form-group"><label>Pembagi:</label><input type="number" id="num2"></div>
+                </div>`;
+        }
     }
 
-    if (['pecahan_ke_desimal', 'pecahan_ke_persen'].includes(selected)) {
-      container.innerHTML = `
-        <div class="form-group"><label>Pembilang:</label><input type="number" id="num1" placeholder="Masukkan pembilang"></div>
-        <div class="form-group"><label>Penyebut:</label><input type="number" id="den1" placeholder="Masukkan penyebut"></div>
-      `;
-      return;
+    // Helper Fungsi Matematis
+    function getGCD(a, b) {
+        return b === 0 ? Math.abs(a) : getGCD(b, a % b);
     }
 
-    // Default geometri & umum
-    const formulaFields = {
-      luas_persegi: [{ id: 's', label: 'Sisi (s)' }],
-      luas_persegi_panjang: [{ id: 'p', label: 'Panjang (p)' }, { id: 'l', label: 'Lebar (l)' }],
-      luas_segitiga: [{ id: 'a', label: 'Alas (a)' }, { id: 't', label: 'Tinggi (t)' }],
-      luas_lingkaran: [{ id: 'r', label: 'Jari-jari (r)' }],
-      volume_kubus: [{ id: 's', label: 'Sisi (s)' }],
-      volume_balok: [{ id: 'p', label: 'Panjang (p)' }, { id: 'l', label: 'Lebar (l)' }, { id: 't', label: 'Tinggi (t)' }],
-      volume_tabung: [{ id: 'r', label: 'Jari-jari (r)' }, { id: 't', label: 'Tinggi (t)' }],
-      pythagoras_c: [{ id: 'a', label: 'Sisi Tegak a' }, { id: 'b', label: 'Sisi Datar b' }],
-      persen: [{ id: 'val', label: 'Nilai Sebagian' }, { id: 'total', label: 'Nilai Total' }]
-    };
-
-    (formulaFields[selected] || []).forEach(field => {
-      const group = document.createElement('div');
-      group.className = 'form-group';
-      group.innerHTML = `<label for="${field.id}">${field.label}:</label><input type="number" id="${field.id}" step="any" placeholder="Masukkan ${field.label}">`;
-      container.appendChild(group);
-    });
-  }
-
-  function calculate() {
-    const selected = document.getElementById('formula-select').value;
-    let res = '', steps = '';
-    const getVal = (id) => parseFloat(document.getElementById(id)?.value || 0);
-
-    // Operasi Pecahan Campuran
-    if (['tambah_campuran', 'kurang_campuran', 'kali_campuran', 'bagi_campuran'].includes(selected)) {
-      const w1 = getVal('w1'), a = getVal('num1'), b = getVal('den1');
-      const w2 = getVal('w2'), c = getVal('num2'), d = getVal('den2');
-
-      if (b === 0 || d === 0) { alert('Penyebut tidak boleh 0!'); return; }
-
-      // Ubah ke pecahan biasa
-      const impNum1 = (Math.abs(w1) * b + a) * (w1 < 0 ? -1 : 1);
-      const impNum2 = (Math.abs(w2) * d + c) * (w2 < 0 ? -1 : 1);
-
-      let resNum, resDen, opName;
-      if (selected === 'tambah_campuran') {
-        resNum = (impNum1 * d) + (impNum2 * b); resDen = b * d; opName = '+';
-      } else if (selected === 'kurang_campuran') {
-        resNum = (impNum1 * d) - (impNum2 * b); resDen = b * d; opName = '-';
-      } else if (selected === 'kali_campuran') {
-        resNum = impNum1 * impNum2; resDen = b * d; opName = '×';
-      } else if (selected === 'bagi_campuran') {
-        if (impNum2 === 0) { alert('Pembagi tidak boleh 0!'); return; }
-        resNum = impNum1 * d; resDen = b * impNum2; opName = '÷';
-      }
-
-      const formatted = formatFraction(resNum, resDen);
-      res = formatted.mixed;
-      steps = `1. Ubah ke pecahan biasa:\n   Pecahan 1 = ${impNum1}/${b}\n   Pecahan 2 = ${impNum2}/${d}\n\n2. Hitung (${impNum1}/${b} ${opName} ${impNum2}/${d}):\n   Hasil Biasa = ${resNum}/${resDen}\n\n3. Sederhanakan & Campuran:\n   Pecahan Biasa = ${formatted.str}\n   Pecahan Campuran = ${formatted.mixed}\n   Desimal = ${(resNum/resDen).toFixed(4)}`;
-    }
-    else if (selected === 'campuran_ke_biasa') {
-      const w = getVal('w1'), a = getVal('num1'), b = getVal('den1');
-      if (b === 0) { alert('Penyebut tidak boleh 0!'); return; }
-      const impNum = (Math.abs(w) * b + a) * (w < 0 ? -1 : 1);
-      const formatted = formatFraction(impNum, b);
-      res = `${impNum}/${b}`;
-      steps = `Rumus: (Utuh × Penyebut + Pembilang) / Penyebut\nPerhitungan: (${w} × ${b} + ${a}) / ${b} = ${impNum}/${b}\n\nDisederhanakan = ${formatted.str}\nNilai Desimal = ${(impNum/b).toFixed(4)}`;
-    }
-    // Pecahan Biasa
-    else if (['tambah_pecahan', 'kurang_pecahan', 'kali_pecahan', 'bagi_pecahan'].includes(selected)) {
-      const a = getVal('num1'), b = getVal('den1'), c = getVal('num2'), d = getVal('den2');
-      if (b === 0 || d === 0) { alert('Penyebut tidak boleh 0!'); return; }
-      let resNum = 0, resDen = 1;
-      if (selected === 'tambah_pecahan') { resNum = (a * d) + (c * b); resDen = b * d; }
-      else if (selected === 'kurang_pecahan') { resNum = (a * d) - (c * b); resDen = b * d; }
-      else if (selected === 'kali_pecahan') { resNum = a * c; resDen = b * d; }
-      else if (selected === 'bagi_pecahan') { resNum = a * d; resDen = b * c; }
-
-      const formatted = formatFraction(resNum, resDen);
-      res = formatted.str;
-      steps = `Hasil Pecahan Biasa = ${resNum}/${resDen}\nDisederhanakan = ${formatted.str}\nPecahan Campuran = ${formatted.mixed}\nDesimal = ${(resNum/resDen).toFixed(4)}`;
-    }
-    else if (selected === 'pecahan_ke_desimal') {
-      const a = getVal('num1'), b = getVal('den1');
-      res = (a / b).toFixed(4).replace(/\.?0+$/, '');
-      steps = `Perhitungan: ${a} ÷ ${b} = ${res}`;
-    }
-    else if (selected === 'pecahan_ke_persen') {
-      const a = getVal('num1'), b = getVal('den1');
-      res = `${((a / b) * 100).toFixed(2).replace(/\.?0+$/, '')}%`;
-      steps = `Perhitungan: (${a} ÷ ${b}) × 100% = ${res}`;
-    }
-    else {
-      let numRes = 0;
-      if (selected === 'luas_persegi') numRes = getVal('s') ** 2;
-      else if (selected === 'luas_persegi_panjang') numRes = getVal('p') * getVal('l');
-      else if (selected === 'luas_segitiga') numRes = 0.5 * getVal('a') * getVal('t');
-      else if (selected === 'luas_lingkaran') numRes = Math.PI * (getVal('r') ** 2);
-      else if (selected === 'volume_kubus') numRes = getVal('s') ** 3;
-      else if (selected === 'volume_balok') numRes = getVal('p') * getVal('l') * getVal('t');
-      else if (selected === 'volume_tabung') numRes = Math.PI * (getVal('r') ** 2) * getVal('t');
-      else if (selected === 'pythagoras_c') numRes = Math.sqrt(getVal('a')**2 + getVal('b')**2);
-      else if (selected === 'persen') numRes = (getVal('val') / (getVal('total') || 1)) * 100;
-      
-      res = Number.isInteger(numRes) ? numRes : numRes.toFixed(2);
-      steps = `Hasil: ${res}`;
+    function getLCM(a, b) {
+        if (a === 0 || b === 0) return 0;
+        return Math.abs((a * b) / getGCD(a, b));
     }
 
-    const resultBox = document.getElementById('result-box');
-    document.getElementById('result-value').textContent = res;
-    document.getElementById('result-steps').textContent = steps;
-    resultBox.style.display = 'block';
-  }
+    function hitung() {
+        const kategori = document.getElementById('kategori').value;
+        const displayHasil = document.getElementById('hasil');
+        let res = 0;
 
-  renderInputs();
+        const val = id => parseFloat(document.getElementById(id)?.value) || 0;
+
+        switch (kategori) {
+            case 'penjumlahan':
+                res = val('num1') + val('num2');
+                break;
+            case 'pengurangan':
+                res = val('num1') - val('num2');
+                break;
+            case 'perkalian':
+                res = val('num1') * val('num2');
+                break;
+            case 'pembagian':
+                const div = val('num2');
+                res = div !== 0 ? (val('num1') / div) : 'Tidak bisa dibagi 0';
+                break;
+            case 'pitagoras':
+                res = Math.sqrt(Math.pow(val('num1'), 2) + Math.pow(val('num2'), 2));
+                break;
+            case 'luas':
+                const subL = document.getElementById('sub_luas').value;
+                if (subL === 'persegi') res = Math.pow(val('num1'), 2);
+                else if (subL === 'persegi_panjang') res = val('num1') * val('num2');
+                else if (subL === 'segitiga') res = 0.5 * val('num1') * val('num2');
+                else if (subL === 'lingkaran') res = Math.PI * Math.pow(val('num1'), 2);
+                break;
+            case 'volume':
+                const subV = document.getElementById('sub_volume').value;
+                if (subV === 'kubus') res = Math.pow(val('num1'), 3);
+                else if (subV === 'balok') res = val('num1') * val('num2') * val('num3');
+                else if (subV === 'tabung') res = Math.PI * Math.pow(val('num1'), 2) * val('num2');
+                break;
+            case 'kpk':
+                res = getLCM(val('num1'), val('num2'));
+                break;
+            case 'fpb':
+                res = getGCD(val('num1'), val('num2'));
+                break;
+            case 'pecahan':
+                const d1 = val('den1'), d2 = val('den2');
+                if (d1 === 0 || d2 === 0) {
+                    res = 'Penyebut tidak boleh 0';
+                } else {
+                    const top = (val('num1') * d2) + (val('num2') * d1);
+                    const bottom = d1 * d2;
+                    const gcd = getGCD(top, bottom);
+                    res = `${top / gcd} / ${bottom / gcd} (${(top / bottom).toFixed(4)})`;
+                }
+                break;
+            case 'pecahan_campuran':
+                const dC = val('den1');
+                if (dC === 0) {
+                    res = 'Penyebut tidak boleh 0';
+                } else {
+                    const topC = (val('num_bulat') * dC) + val('num1');
+                    res = `${topC} / ${dC}`;
+                }
+                break;
+            case 'desimal':
+                const dD = val('den1');
+                res = dD !== 0 ? (val('num1') / dD) : 'Penyebut tidak boleh 0';
+                break;
+            case 'persen':
+                res = (val('num1') / 100) * val('num2');
+                break;
+            case 'lainnya':
+                const subO = document.getElementById('sub_lainnya').value;
+                if (subO === 'pangkat') res = Math.pow(val('num1'), val('num2'));
+                else if (subO === 'akar') res = Math.sqrt(val('num1'));
+                else if (subO === 'modulo') res = val('num1') % val('num2');
+                break;
+        }
+
+        if (typeof res === 'number') {
+            res = Number.isInteger(res) ? res : res.toFixed(4).replace(/\.?0+$/, '');
+        }
+
+        displayHasil.innerText = res;
+    }
+
+    // Inisialisasi awal saat halaman dibuka
+    renderInputFields();
 </script>
 
 </body>
